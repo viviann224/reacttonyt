@@ -34,7 +34,6 @@ After confirming that you have an up to date git repository and a Heroku app cre
 ```
 yarn build
 ```
-> Note: A yarn build will be required to register any new Post requests from any front-end JavaScript to to prevent any proxy server errors.
 
 2. Add and commit all changes to git
 
