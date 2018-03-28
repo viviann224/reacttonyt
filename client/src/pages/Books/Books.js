@@ -6,18 +6,29 @@ import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
-
+import { RecipeList, RecipeListItem } from "../../components/RecipeList";
+//import Headlines from "../../components/Headlines";
 class Books extends Component {
   state = {
     books: [],
     title: "",
     author: "",
-    synopsis: ""
+    synopsis: "",
+    recipes: [],
+    recipeSearch: ""
   };
 
   componentDidMount() {
     this.loadBooks();
   }
+
+ searchFormSubmit = event => {
+    // When the form is submitted, prevent its default behavior, get recipes update the recipes state
+    //event.preventDefault();
+    API.getRecipes(this.state.recipeSearch)
+      .then(res => this.setState({ recipes: res.data }))
+      .catch(err => console.log(err));
+  };
 
   loadBooks = () => {
     API.getBooks()
@@ -34,10 +45,12 @@ class Books extends Component {
   };
 
   handleInputChange = event => {
+
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
+    console.log(value);
   };
 
   handleFormSubmit = event => {
@@ -91,7 +104,26 @@ class Books extends Component {
           <Col size="md-6 sm-12">
             <Jumbotron>
               <h1>Books On My List</h1>
-            </Jumbotron>
+              </Jumbotron>
+             <Input
+                name="recipeSearch"
+                value={this.state.recipeSearch}
+                onChange={this.handleInputChange}
+                placeholder="Search For a Recipe"
+              />
+
+      
+         <FormBtn
+          onClick={this.searchFormSubmit}
+          type="success"
+          className="input-lg"
+        >
+          Search
+        </FormBtn>
+
+
+
+            
             {this.state.books.length ? (
               <List>
                 {this.state.books.map(book => (
