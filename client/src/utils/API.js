@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default {
-  // Gets all books
+  //Gets all books
   getArticles: function() {
     return axios.get("/api/articles");
   },
@@ -16,5 +16,9 @@ export default {
   // Saves a book to the database
   saveArticle: function(articleData) {
     return axios.post("/api/articles", articleData);
+  },
+  queryNYT: function (queryUrl) {
+    console.log(axios.get(queryUrl));
+    return axios.get(queryUrl);
   }
 };
