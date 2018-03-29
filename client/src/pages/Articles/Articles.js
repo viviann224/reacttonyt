@@ -4,7 +4,6 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { H1, H3, H4 } from '../../components/Headings';
 import { Col, Row, Container } from "../../components/Grid";
-import { Article } from '../../components/Article';
 import { List, ListItem } from "../../components/List";
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';

@@ -3,7 +3,6 @@ import { Article } from '../../components/Article'
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
 import { H1, H3 } from '../../components/Headings';
-import { Container, Row, Col } from "../../components/Grid";
 import API from "../../utils/API";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel'
 
