@@ -3,8 +3,9 @@ const Schema = mongoose.Schema;
 
 const articleSchema = new Schema({
   title: { type: String, required: true },
-  author: { type: String, required: true },
-  synopsis: String,
+  url: { type: String, required: true },
+  summary: {type: String, required: false},
+  saved: { type: Boolean, default: false },
   date: { type: Date, default: Date.now }
 });
 
