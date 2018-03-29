@@ -1,12 +1,12 @@
 import React, { Component } from "react";
-import DeleteBtn from "../../components/DeleteBtn";
+import { Article } from '../../components/Article'
 import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
-import { Link } from "react-router-dom";
+import { H1, H3, H4 } from '../../components/Headings';
 import { Col, Row, Container } from "../../components/Grid";
 import { Article } from '../../components/Article';
 import { List, ListItem } from "../../components/List";
-import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
 
 class Articles extends Component {
@@ -19,6 +19,27 @@ class Articles extends Component {
     previousSearch: {},//previous search term saved after search completed
     noResults: false,//boolean used as flag for conditional rendering
   };
+
+  //function to save an article
+  saveArticle = (article) => {
+    //creating new article object
+    let newArticle = {
+      date: article.pub_date,
+      title: article.headline.main,
+      url: article.web_url,
+      summary: article.snippet
+    }
+
+    //calling the API
+    API
+      .saveArticle(newArticle)
+      .then(results => {
+        //removing the saved article from the results in state
+        let unsavedArticles = this.state.results.filter(article => article.headline.main !== newArticle.title)
+        this.setState({results: unsavedArticles})
+      })
+      .catch(err => console.log(err));
+  }
 
   // componentDidMount() {
   //   this.loadArticles();
@@ -63,7 +84,7 @@ class Articles extends Component {
   };
 
   //function that queries the NYT API
-  unsavedgetArticles = query => 
+  getHeadlines = query => 
   {
     //clearing the results array if the user changes search terms
     if (query.topic !== this.state.previousSearch.topic ||
@@ -74,7 +95,7 @@ class Articles extends Component {
     }
     let { topic, startyear, endyear } = query
 
-    let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=0`
+    let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${this.state.page}`
     let key = `&api-key=ac37023831a046ad9447acf3101b4c79`
 
     //removing spaces and building the query url conditionally
@@ -111,6 +132,18 @@ class Articles extends Component {
           });
       })
       .catch(err=> console.log(err))
+  }
+
+  //function that is called when user clicks the get more results button
+  getMoreResults = () => {
+    let { topic, endyear, startyear} = this.state.previousSearch;
+    let query = { topic, endyear, startyear }
+    //increments page number for search and then runs query
+    let page = this.state.page;
+    page++
+    this.setState({page: page}, function (){
+      this.getHeadlines(query)
+    });
   }
 
 
