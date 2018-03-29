@@ -4,17 +4,20 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { Link } from "react-router-dom";
 import { Col, Row, Container } from "../../components/Grid";
+import { Article } from '../../components/Article';
 import { List, ListItem } from "../../components/List";
 import { Input, TextArea, FormBtn } from "../../components/Form";
+import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
 
 class Articles extends Component {
   state = {
     articles: [],
-    topic: "",
+    Article: "",
     startyear: "",
     endyear: "",
     page: '0',//page of search results
     previousSearch: {},//previous search term saved after search completed
+    noResults: false,//boolean used as flag for conditional rendering
   };
 
   // componentDidMount() {
@@ -48,7 +51,7 @@ class Articles extends Component {
     //{
       let {topic, startyear, endyear} = this.state;
       let query ={topic, startyear, endyear}
-      this.getArticles(query);
+      this.getHeadlines(query);
     //   API.saveArticle({
     //     topic: this.state.topic,
     //     startyear: this.state.startyear,
@@ -60,7 +63,7 @@ class Articles extends Component {
   };
 
   //function that queries the NYT API
-  getArticles = query => 
+  unsavedgetArticles = query => 
   {
     //clearing the results array if the user changes search terms
     if (query.topic !== this.state.previousSearch.topic ||
@@ -154,22 +157,26 @@ class Articles extends Component {
             <Jumbotron>
               <h1>Articles On My List</h1>
             </Jumbotron>
-            {this.state.articles.length ? (
-              <List>
-                {this.state.articles.map(article => (
-                  <ListItem key={article._id}>
-                    <Link to={"/articles/" + article._id}>
-                      <strong>
-                        {article.topic} by {article.startyear}
-                      </strong>
-                    </Link>
-                    <DeleteBtn onClick={() => this.deleteArticle(article._id)} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )}
+           
+             
+                    <h3>Results</h3>
+                   <PanelBody>
+                    {
+                      this.state.results.map((article, i) => (
+                          <Article
+                            key={i}
+                            title={article.headline.main}
+                            url={article.web_url}
+                            summary={article.snippet}
+                            date={article.pub_date}
+                            type='Save'
+                            onClick={() => this.saveArticle(article)}
+                          />
+                        )
+                      )
+                    }
+                      <FormBtn type='warning' additional='btn-block' onClick={this.getMoreResults}>Get more results</FormBtn>
+                  </PanelBody>
           </Col>
         </Row>
       </Container>
