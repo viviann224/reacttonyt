@@ -16,26 +16,26 @@ class Articles extends Component {
     endyear: "",
     page: '0',//page of search results
     previousSearch: {},//previous search term saved after search completed
-    noResults: false,//boolean used as flag for conditional rendering
+    noarticles: false,//boolean used as flag for conditional rendering
   };
 
   //function to save an article
-  saveArticle = (article) => {
+  saveArticle = (result) => {
     //creating new article object
-    let newArticle = {
-      date: article.pub_date,
-      title: article.headline.main,
-      url: article.web_url,
-      summary: article.snippet
+    let newResult = {
+      date: result.pub_date,
+      title: result.headline.main,
+      url: result.web_url,
+      summary: result.snippet
     }
-
+    console.log("saved area: "+result.pub_date + result.headline.main+ result.web_url);
     //calling the API
     API
-      .saveArticle(newArticle)
-      .then(results => {
-        //removing the saved article from the results in state
-        let unsavedArticles = this.state.results.filter(article => article.headline.main !== newArticle.title)
-        this.setState({results: unsavedArticles})
+      .saveArticle(newResult)
+      .then(articles => {
+        //removing the saved article from the articles in state
+        let unsavedArticles = this.state.articles.filter(result => result.headline.main !== newResult.title)
+        this.setState({articles: unsavedArticles})
       })
       .catch(err => console.log(err));
   }
@@ -90,7 +90,7 @@ class Articles extends Component {
         query.endyear !==this.state.previousSearch.endyear ||
         query.startyear !==this.state.previousSearch.startyear) 
     {
-      this.setState({results: []})
+      this.setState({articles: []})
     }
     let { topic, startyear, endyear } = query
 
@@ -116,34 +116,38 @@ class Articles extends Component {
     //calling the API
     API
       .queryNYT(queryUrl)
-      .then(results => {
+      .then(articles => {
+        console.log("the articles: " +articles.data.response.docs);
           //concatenating new results to the current state of results.  If empty will just show results,
           //but if search was done to get more, it shows all results.  Also stores current search terms
-          //for conditional above, and sets the noResults flag for conditional rendering of components below
+          //for conditional above, and sets the noarticles flag for conditional rendering of components below
           this.setState({
-            results: [...this.state.results, ...results.data.response.docs],
+            articles: [...this.state.articles, ...articles.data.response.docs],
             previousSearch: query,
             topic: '',
             startyear: '',
-            endyear: ''
+            endyear: '',
+            title:'',
+            data:'',
+            url:''
           }, function (){
-            this.state.results.length === 0 ? this.setState({noResults: true}) : this.setState({noResults: false})
+            this.state.articles.length === 0 ? this.setState({noarticles: true}) : this.setState({noarticles: false})
           });
       })
       .catch(err=> console.log(err))
   }
 
-  //function that is called when user clicks the get more results button
-  getMoreResults = () => {
-    let { topic, endyear, startyear} = this.state.previousSearch;
-    let query = { topic, endyear, startyear }
-    //increments page number for search and then runs query
-    let page = this.state.page;
-    page++
-    this.setState({page: page}, function (){
-      this.getHeadlines(query)
-    });
-  }
+  // //function that is called when user clicks the get more results button
+  // getMoreResults = () => {
+  //   let { topic, endyear, startyear} = this.state.previousSearch;
+  //   let query = { topic, endyear, startyear }
+  //   //increments page number for search and then runs query
+  //   let page = this.state.page;
+  //   page++
+  //   this.setState({page: page}, function (){
+  //     this.getHeadlines(query)
+  //   });
+  // }
 
 
 
@@ -200,16 +204,16 @@ class Articles extends Component {
                 </Form>
               </PanelBody>
             </Panel>
-            { this.state.noResults ?
+            { this.state.noarticles ?
               (<H1>No results Found.  Please try again</H1>) :
-              this.state.results.length>0 ? (
+              this.state.articles.length>0 ? (
                 <Panel>
                   <PanelHeading>
                     <H3>Results</H3>
                   </PanelHeading>
                   <PanelBody>
                     {
-                      this.state.results.map((article, i) => (
+                      this.state.articles.map((article, i) => (
                           <Article
                             key={i}
                             title={article.headline.main}

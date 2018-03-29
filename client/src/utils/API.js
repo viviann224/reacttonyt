@@ -18,7 +18,7 @@ export default {
     return axios.post("/api/articles", articleData);
   },
   queryNYT: function (queryUrl) {
-    console.log(axios.get(queryUrl));
+ 
     return axios.get(queryUrl);
   }
 };
