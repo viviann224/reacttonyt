@@ -154,46 +154,61 @@ class Articles extends Component {
         <Row>
           <Col size="md-6">
             <Jumbotron>
-              <h1>What Articles Should I Read?</h1>
+              <H1 className='page-header text-center'>REACT to NEW YORK TIMES</H1>
+              <H4 className='text-center'>Reacting to all the best articles one save at a time</H4>
             </Jumbotron>
-            <form>
-              <Input
-                value={this.state.topic}
-                onChange={this.handleInputChange}
-                value={this.state.topic}
-                name="topic"
-                placeholder="topic (required)"
-              />
-              <Input
-                value={this.state.startyear}
-                onChange={this.handleInputChange}
-                name="startyear"
-                value={this.state.startyear}
-                placeholder="startyear (required)"
-              />
-              <TextArea
-                value={this.state.endyear}
-                onChange={this.handleInputChange}
-                value={this.state.endyear}
-                name="endyear"
-                placeholder="endyear (Optional)"
-              />
-              <FormBtn
-                disabled={!(this.state.startyear && this.state.topic)}
-                onClick={this.handleFormSubmit}
-              >
-                Submit Article
-              </FormBtn>
-            </form>
-          </Col>
-          <Col size="md-6 sm-12">
-            <Jumbotron>
-              <h1>Articles On My List</h1>
-            </Jumbotron>
-           
-             
-                    <h3>Results</h3>
-                   <PanelBody>
+            <Panel>
+              <PanelHeading>
+                <H3>Search</H3>
+              </PanelHeading>
+              <PanelBody>
+                <Form style={{marginBottom: '30px'}}>
+                  <FormGroup>
+                    <Label htmlFor="topic">Search a topic:</Label>
+                    <Input
+                      onChange={this.handleInputChange}
+                      name='topic'
+                      value={this.state.topic}
+                      placeholder='Topic of Interest'
+                    />
+                  </FormGroup>
+                  <FormGroup >
+                    <Label htmlFor="startyear">Choose a beginning date to search (optional):</Label>
+                    <Input
+                      onChange={this.handleInputChange}
+                      type='date'
+                      name='startyear'
+                      value={this.state.startyear}
+                      placeholder='Starting Year'
+                    />
+                  </FormGroup>
+                  <FormGroup >
+                    <Label htmlFor="endyear">Choose an end date to search for (optional):</Label>
+                    <Input
+                      onChange={this.handleInputChange}
+                      type='date'
+                      name='endyear'
+                      value={this.state.endyear}
+                      placeholder='Ending Year'
+                    />
+                  </FormGroup>
+                  <FormBtn
+                    disabled={!(this.state.topic)}
+                    onClick={this.handleFormSubmit}
+                    type='info'
+                    >Submit
+                  </FormBtn>
+                </Form>
+              </PanelBody>
+            </Panel>
+            { this.state.noResults ?
+              (<H1>No results Found.  Please try again</H1>) :
+              this.state.results.length>0 ? (
+                <Panel>
+                  <PanelHeading>
+                    <H3>Results</H3>
+                  </PanelHeading>
+                  <PanelBody>
                     {
                       this.state.results.map((article, i) => (
                           <Article
@@ -210,6 +225,9 @@ class Articles extends Component {
                     }
                       <FormBtn type='warning' additional='btn-block' onClick={this.getMoreResults}>Get more results</FormBtn>
                   </PanelBody>
+                </Panel>
+              ) : ''
+            }
           </Col>
         </Row>
       </Container>
