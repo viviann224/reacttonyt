@@ -5,6 +5,7 @@ import SavedArticles from "./pages/SavedArticles";
 import NoMatch from "./pages/NoMatch";
 import Nav from "./components/Nav";
 
+//paths to connect to from the client side
 const App = () => (
   <Router>
     <div>

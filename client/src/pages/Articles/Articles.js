@@ -64,12 +64,6 @@ class Articles extends Component {
 
   };
 
-  // deleteArticle = id => {
-  //   API.deleteArticle(id)
-  //     .then(res => this.loadArticles())
-  //     .catch(err => console.log(err));
-  // };
-
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({
@@ -79,19 +73,10 @@ class Articles extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    //if (this.state.topic && this.state.startyear) 
-    //{
+
       let {topic, startyear, endyear} = this.state;
       let query ={topic, startyear, endyear}
       this.getHeadlines(query);
-    //   API.saveArticle({
-    //     topic: this.state.topic,
-    //     startyear: this.state.startyear,
-    //     endyear: this.state.endyear
-    //   })
-    //     .then(res => this.loadArticles())
-    //     .catch(err => console.log(err));
-    //}
   };
 
   //function that queries the NYT API
@@ -148,20 +133,6 @@ class Articles extends Component {
       })
       .catch(err=> console.log(err))
   }
-
-  // //function that is called when user clicks the get more results button
-  // getMoreResults = () => {
-  //   let { topic, endyear, startyear} = this.state.previousSearch;
-  //   let query = { topic, endyear, startyear }
-  //   //increments page number for search and then runs query
-  //   let page = this.state.page;
-  //   page++
-  //   this.setState({page: page}, function (){
-  //     this.getHeadlines(query)
-  //   });
-  // }
-
-
 
   render() {
     return (
@@ -245,10 +216,6 @@ class Articles extends Component {
               ) : ''
             }
           </Col>
-          
-
-
-          
         </Row>
       </Container>
     );
