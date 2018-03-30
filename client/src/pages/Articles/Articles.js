@@ -4,10 +4,10 @@ import Jumbotron from "../../components/Jumbotron";
 import API from "../../utils/API";
 import { H1, H3, H4 } from '../../components/Headings';
 import { Col, Row, Container } from "../../components/Grid";
-import { List, ListItem } from "../../components/List";
+//import {  ListItem } from "../../components/List";
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
-import Detail from "../SavedArticles";
+//import Detail from "../SavedArticles";
 
 class Articles extends Component {
   state = {
@@ -31,7 +31,7 @@ class Articles extends Component {
       url: result.web_url,
       summary: result.snippet
     }
-    console.log("saved area: "+result.pub_date + result.headline.main+ result.web_url);
+    //console.log("saved area: "+result.pub_date + result.headline.main+ result.web_url);
     //calling the API
     API
       .saveArticle(newResult)
@@ -47,7 +47,7 @@ class Articles extends Component {
       .catch(err => console.log(err));
 
       this.loadArticles();
-      console.log("finished saving");
+      //console.log("finished saving");
   }
 
  componentWillMount() 
@@ -114,7 +114,7 @@ class Articles extends Component {
     API
       .queryNYT(queryUrl)
       .then(articles => {
-        console.log("the articles: " +articles.data.response.docs);
+        //console.log("the articles: " +articles.data.response.docs);
           //concatenating new results to the current state of results.  If empty will just show results,
           //but if search was done to get more, it shows all results.  Also stores current search terms
           //for conditional above, and sets the noarticles flag for conditional rendering of components below
@@ -131,7 +131,7 @@ class Articles extends Component {
             this.state.articles.length === 0 ? this.setState({noarticles: true}) : this.setState({noarticles: false})
           });
       })
-      .catch(err=> console.log(err))
+      //.catch(err=> console.log(err))
   }
 
   render() {
