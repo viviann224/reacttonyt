@@ -7,7 +7,7 @@ const Nav = () => (
       <div className="navbar-header">
         
         <a href="/" className="navbar-brand ">
-          React Reading List
+          React to New York Times
         </a>
         <a className="navbar-brand" href="/savedArticles">Saved Articles</a>
       </div>

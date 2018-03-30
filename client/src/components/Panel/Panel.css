@@ -13,5 +13,18 @@ h3
 
 .panel-body
 {
-	color:gray;
+	color:#808080;
+	font-size:12px;
 }
+
+ a:hover
+ {
+ 	color: none !important;
+ 	border-color: none !important;
+ 	border:2px !important;
+ }
+ id:hover
+ {
+ 	border-color: none !important;
+
+ }
