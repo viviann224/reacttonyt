@@ -1,42 +1,48 @@
-# Create React Express App
+# REACT to New York Times
+**GETTING STARTED**:
+The program should run automatically.
 
-## About This Boilerplate
+If the program is not running automatically, please make sure you have all the prerequisites listed below.
 
-This setup allows for a Node/Express/React app which can be easily deployed to Heroku.
+**STATEMENT OF PURPOSE**:
+CONCENTRATION is web application which is a memory game similar to the classic memory card game.  CONCENTRATION  uses React to quickly create a web application with JSX and sugar coated JS to create.
 
-The front-end React app will auto-reload as it's updated via webpack dev server, and the backend Express app will auto-reload independently with nodemon.
+NYT Scraping TROLL. is full-stack site which utlilizes handlebars design and uses mongoose, body-parser,  morgan, request, cheerio,  and Express.
 
-## Starting the app locally
+NYT Scraping TROLL. is a persitent site which uses mLab database to store mongoose data when deployed by Heroku.
 
-Start by installing front and backend dependencies. While in this directory, run the following commands:
+**PREREQUISITES**:
+- Google Chrome Internet Browser
+- JavaScript enabled on Google Chrome
+- Access to Google Font packages
+- Capability to run files in package.json (yarn, react)
+- GitHub
+- CDN support on Bootstrap
+- Perfered viewing in English language :us:
 
-```
-yarn install
-cd client
-yarn install
-cd ..
-``
+**HOW TO USE**:
 
-After both installations complete, run the following command in your terminal:
+The user will pick a card and will score a point for each card that is different from the deck. There are 12 cards, so the max score is 12. If the user clicks on the same card again, the user loses and can start over. The application was created from react and deployed via gitHub.
 
-```
-yarn start
-```
+**BUILT WITH**:
+- Sublime Text
+- Chrome DevTools
+- Bootstrap
+- GitHub
+- Google fonts
+- Adobe Photoshop
+- React
 
-That's it, your app should be running on <http://localhost:3000>. The Express server should intercept any AJAX requests from the client.
+**VERSION**:
+This is the first version of CONCENTRATION.
 
-## Deployment (Heroku)
+**LICENSE**:
+This project is licensed under GitHub.
 
-After confirming that you have an up to date git repository and a Heroku app created, complete the following:
+**AUTHOR**:
+- Vivian Tuong Nguyen - Initial work
 
-1. Build the React app for production by running the following command:
+**ACKNOWLEDGMENTS**:
+All rights are reserved to Vivian Tuong Nguyen. Do not alter or manipulate content and images from Vivian Tuong Nguyen.
+Copyright   :copyright: 2018
 
-```
-yarn build
-```
-
-2. Add and commit all changes to git
-
-3. Push to Heroku
-
-If all previous steps were followed correctly, your application should be deployed to Heroku!
