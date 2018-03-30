@@ -1,15 +1,17 @@
-# REACT to New York Times
+# REACT to the New York Times
 **GETTING STARTED**:
 The program should run automatically.
 
 If the program is not running automatically, please make sure you have all the prerequisites listed below.
 
 **STATEMENT OF PURPOSE**:
-CONCENTRATION is web application which is a memory game similar to the classic memory card game.  CONCENTRATION  uses React to quickly create a web application with JSX and sugar coated JS to create.
+REACT to the New York Times is a React-based application of the New York Times Article Search where users can save and delete articles. REACTing to all the best articles one SAVE at a time.
 
-NYT Scraping TROLL. is full-stack site which utlilizes handlebars design and uses mongoose, body-parser,  morgan, request, cheerio,  and Express.
+REACT to the New York Times  uses React to quickly create a web application with JSX and sugar coated JS.
 
-NYT Scraping TROLL. is a persitent site which uses mLab database to store mongoose data when deployed by Heroku.
+REACT to the New York Time is full-stack site which utlilizes uses mongoose, body-parser,  morgan, request, New York Times API,  and Express.
+
+REACT to the New York Times  is a persitent site which uses mLab database to store mongoose data when deployed by Heroku.
 
 **PREREQUISITES**:
 - Google Chrome Internet Browser
@@ -22,7 +24,13 @@ NYT Scraping TROLL. is a persitent site which uses mLab database to store mongoo
 
 **HOW TO USE**:
 
-The user will pick a card and will score a point for each card that is different from the deck. There are 12 cards, so the max score is 12. If the user clicks on the same card again, the user loses and can start over. The application was created from react and deployed via gitHub.
+The user will input a search topic (the minimum is topic minimum and the search time is optional ) and hit submit. If there are results the application will display the article, a summary, and options to read the article or to save for later use. The search is not persistent until the user saves the article.
+
+When the article is saved, the article will be stored into the mLab database and user can retrieve the article on the main navigation bar "SAVED ARTICLES."  In the SAVED ARTICLES field the user is able to delete the article off the database or read the article.
+
+If the user wants to find another search topic go ahead and click on the "REACT TO NEW YORK TIMES" on the top navigation to go back.
+
+The application was created from react and deployed via gitHub.
 
 **BUILT WITH**:
 - Sublime Text
@@ -34,7 +42,7 @@ The user will pick a card and will score a point for each card that is different
 - React
 
 **VERSION**:
-This is the first version of CONCENTRATION.
+This is the first version of REACT to the New York Times .
 
 **LICENSE**:
 This project is licensed under GitHub.
