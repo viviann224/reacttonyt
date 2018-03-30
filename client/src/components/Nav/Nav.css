@@ -1,0 +1,27 @@
+
+.navbar-brand
+{
+
+  font-size:20px;
+  padding-left:15px;
+  text-align:center;
+}
+
+a {
+    color: #ffffff;
+}
+
+.panel-primary
+{
+  background-color: #f7f7f9 !important;
+  border-color: #dfdfdf;
+}
+
+
+
+ .panel-primary >.panel-heading
+ {
+  background-color: #f7f7f9 !important;
+  border-color: #f7f7f9;
+
+ }

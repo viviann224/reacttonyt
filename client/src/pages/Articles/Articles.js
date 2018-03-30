@@ -7,6 +7,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { List, ListItem } from "../../components/List";
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
+import Detail from "../SavedArticles";
 
 class Articles extends Component {
   state = {
@@ -17,10 +18,12 @@ class Articles extends Component {
     page: '0',//page of search results
     previousSearch: {},//previous search term saved after search completed
     noarticles: false,//boolean used as flag for conditional rendering
+    savedArticles: {}
   };
 
   //function to save an article
-  saveArticle = (result) => {
+  saveArticle = (result) => 
+  {
     //creating new article object
     let newResult = {
       date: result.pub_date,
@@ -32,25 +35,34 @@ class Articles extends Component {
     //calling the API
     API
       .saveArticle(newResult)
-      .then(articles => {
+      .then(articles => 
+      {
         //removing the saved article from the articles in state
         let unsavedArticles = this.state.articles.filter(result => result.headline.main !== newResult.title)
         this.setState({articles: unsavedArticles})
+        //when state updated go ahead (referesh)/read the update data
+        
+
       })
       .catch(err => console.log(err));
+
+      this.loadArticles();
+      console.log("finished saving");
   }
 
-  // componentDidMount() {
-  //   this.loadArticles();
-  // }
+ componentWillMount() 
+  {  this.loadArticles();}
 
-  // loadArticles = () => {
-  //   API.getArticles()
-  //     .then(res =>
-  //       this.setState({ articles: res.data, topic: "", startyear: "", endyear: "" })
-  //     )
-  //     .catch(err => console.log(err));
-  // };
+  //function reads requests from previously saved articles (from the db) and returns the info 
+  loadArticles = () => {
+    API
+      .getArticles()
+      .then(results => {
+
+        this.setState({savedArticles: results.data})
+      })
+
+  };
 
   // deleteArticle = id => {
   //   API.deleteArticle(id)
@@ -155,10 +167,11 @@ class Articles extends Component {
     return (
       <Container fluid>
         <Row>
-          <Col size="md-6">
+          <Col size="md-12">
             <Jumbotron>
               <H1 className='page-header text-center'>REACT to NEW YORK TIMES</H1>
               <H4 className='text-center'>Reacting to all the best articles one save at a time</H4>
+            
             </Jumbotron>
             <Panel>
               <PanelHeading>
@@ -232,6 +245,10 @@ class Articles extends Component {
               ) : ''
             }
           </Col>
+          
+
+
+          
         </Row>
       </Container>
     );

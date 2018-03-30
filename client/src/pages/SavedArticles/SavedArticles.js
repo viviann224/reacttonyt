@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Article } from '../../components/Article'
 import { Col, Row, Container } from "../../components/Grid";
 import Jumbotron from "../../components/Jumbotron";
-import { H1, H3 } from '../../components/Headings';
+import { H1, H3, H4 } from '../../components/Headings';
 import API from "../../utils/API";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel'
 
@@ -19,7 +19,8 @@ class Detail extends Component {
     API
       .getArticles()
       .then(results => {
-        this.setState({savedArticles: results.data})
+        this.setState({savedArticles: results.data});
+
       })
   };
 
@@ -44,8 +45,9 @@ class Detail extends Component {
         <Row>
           <Col size="md-12">
             <Jumbotron>
-              <H1 className="text-center">Saved New York Times Articles</H1>
-              <hr style={{width: '60%'}}/>
+              <H1 className='page-header text-center'>REACT to NEW YORK TIMES</H1>
+              <H4 className='text-center'>Reacting to all the best articles one save at a time</H4>
+            
             </Jumbotron>
             <Panel>
               <PanelHeading>

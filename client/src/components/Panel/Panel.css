@@ -1,0 +1,17 @@
+.panel
+{
+	
+	 margin: auto;
+}
+h3
+{
+	color: #343a40;
+	font-weight: bold;
+	text-shadow: 2px 2px 4px #717171;
+	font-size: 20px;
+}
+
+.panel-body
+{
+	color:gray;
+}
