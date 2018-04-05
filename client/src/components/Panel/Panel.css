@@ -22,7 +22,9 @@ h3
  	color: none !important;
  	border-color: none !important;
  	border:2px !important;
+  	background-color: none !important;
  }
+
  id:hover
  {
  	border-color: none !important;
