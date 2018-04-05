@@ -15,7 +15,7 @@ class Articles extends Component {
     Article: "",
     startyear: "",
     endyear: "",
-    page: '0',//page of search results
+    page: "0",//page of search results
     previousSearch: {},//previous search term saved after search completed
     noarticles: false,//boolean used as flag for conditional rendering
     savedArticles: {}
@@ -54,7 +54,8 @@ class Articles extends Component {
   {  this.loadArticles();}
 
   //function reads requests from previously saved articles (from the db) and returns the info 
-  loadArticles = () => {
+  loadArticles = () => 
+  {
     API
       .getArticles()
       .then(results => {
@@ -64,23 +65,28 @@ class Articles extends Component {
 
   };
 
-  handleInputChange = event => {
+  handleInputChange = event => 
+  {
+
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   };
 
-  handleFormSubmit = event => {
+  handleFormSubmit = event => 
+  {
     event.preventDefault();
-
-      let {topic, startyear, endyear} = this.state;
-      let query ={topic, startyear, endyear}
-      this.getHeadlines(query);
+    //once user clicks submit go ahead and update the topic, startyear, and endyear to the current value user put in
+    let {topic, startyear, endyear} = this.state;
+    //go ahead and pass in the current values into query
+    let query ={topic, startyear, endyear}
+    //call get headlines and narrow down the nyt search results with the query 
+    this.getHeadlines(query);
   };
 
-  //function that queries the NYT API
-  getHeadlines = query => 
+  //function that requests the NYT API
+  getHeadlines = (query) => 
   {
     //clearing the results array if the user changes search terms
     if (query.topic !== this.state.previousSearch.topic ||
@@ -153,29 +159,36 @@ class Articles extends Component {
                   <FormGroup>
                     <Label htmlFor="topic">Search a topic:</Label>
                     <Input
-                      onChange={this.handleInputChange}
                       name='topic'
-                      value={this.state.topic}
+                      value={this.state.name}
+                      onChange={this.handleInputChange}
+                      
+                      
                       placeholder='Topic of Interest'
                     />
                   </FormGroup>
                   <FormGroup >
                     <Label htmlFor="startyear">Choose a beginning date to search (optional):</Label>
                     <Input
+                    
+                     name='startyear'
+                    value={this.state.startyear}
                       onChange={this.handleInputChange}
                       type='date'
-                      name='startyear'
-                      value={this.state.startyear}
+                     
+                      
                       placeholder='Starting Year'
                     />
                   </FormGroup>
                   <FormGroup >
                     <Label htmlFor="endyear">Choose an end date to search for (optional):</Label>
                     <Input
+                    name='endyear'
+                      value={this.state.endyear}
                       onChange={this.handleInputChange}
                       type='date'
-                      name='endyear'
-                      value={this.state.endyear}
+                      
+                      
                       placeholder='Ending Year'
                     />
                   </FormGroup>
@@ -210,7 +223,7 @@ class Articles extends Component {
                         )
                       )
                     }
-                      <FormBtn type='warning' additional='btn-block' onClick={this.getMoreResults}>Get more results</FormBtn>
+                     
                   </PanelBody>
                 </Panel>
               ) : ''
