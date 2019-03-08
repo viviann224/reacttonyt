@@ -92,7 +92,9 @@ class Articles extends Component
     let { topic, startyear, endyear } = query
 
     let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${this.state.page}`
-    let key = `&api-key=ac37023831a046ad9447acf3101b4c79`
+    //let key = `&api-key=ac37023831a046ad9447acf3101b4c79`
+    let key = `&api-key=TG0BIFFzSF9qw8BqZjaNMRKOHxXaYjBO`
+    
 
     //removes the special spaces in the search query url
     if(topic.indexOf(' ')>=0){
