@@ -7,7 +7,7 @@ import { Col, Row, Container } from "../../components/Grid";
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
 import Alert from "../components/Alert";
-
+require("dotenv").config();
 
 class Articles extends Component 
 { //variables initalized with state properties
@@ -21,7 +21,6 @@ class Articles extends Component
     previousSearch: {},   //keep track of the previous state query 
     noarticles: false,    //boolean variable to determine to display noarticles found
     savedArticles: {},     //keep track of specific saved articles
-    error:""              //error msgs for user
   };
 
   //function to save an article from the api call
@@ -51,7 +50,8 @@ class Articles extends Component
 
 //once everything loads go ahead and display (on the first user scession)
  componentWillMount() 
-  {  this.loadArticles();}
+  {  this.loadArticles();
+
 
   //loadArticles is a function which reads requests from previously saved articles (from the db) and returns the info 
   loadArticles = () => 
@@ -95,9 +95,7 @@ class Articles extends Component
     let { topic, startyear, endyear } = query
 
     let queryUrl = `https://api.nytimes.com/svc/search/v2/articlesearch.json?sort=newest&page=${this.state.page}`
-    //let key = `&api-key=ac37023831a046ad9447acf3101b4c79`
-    let key = `&api-key=TG0BIFFzSF9qw8BqZjaNMRKOHxXaYjBO`
-    
+ 
 
     //removes the special spaces in the search query url
     if(topic.indexOf(' ')>=0){
@@ -113,9 +111,8 @@ class Articles extends Component
     if(endyear){
       queryUrl+= `&end_date=${endyear}`
     }
-    queryUrl+=key;
-
-
+    queryUrl+=process.env.NYTkey;
+  
 
     //once queryUrl build go ahead and pass an api request to nyt
     API
