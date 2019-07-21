@@ -6,6 +6,8 @@ import { H1, H3, H4 } from '../../components/Headings';
 import { Col, Row, Container } from "../../components/Grid";
 import { Form, Input, FormBtn, FormGroup, Label } from "../../components/Form";
 import { Panel, PanelHeading, PanelBody } from '../../components/Panel';
+import Alert from "../components/Alert";
+
 
 class Articles extends Component 
 { //variables initalized with state properties
@@ -18,7 +20,8 @@ class Articles extends Component
     page: "0",            //pages of results
     previousSearch: {},   //keep track of the previous state query 
     noarticles: false,    //boolean variable to determine to display noarticles found
-    savedArticles: {}     //keep track of specific saved articles
+    savedArticles: {},     //keep track of specific saved articles
+    error:""              //error msgs for user
   };
 
   //function to save an article from the api call
@@ -111,6 +114,8 @@ class Articles extends Component
       queryUrl+= `&end_date=${endyear}`
     }
     queryUrl+=key;
+
+
 
     //once queryUrl build go ahead and pass an api request to nyt
     API
